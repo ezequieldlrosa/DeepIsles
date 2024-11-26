@@ -5,8 +5,7 @@
 ## Introduction
 Ischemic stroke lesion segmentation in MRI.
 
-This repository contains an ensemble algorithm devised in the context of the ISLES'22 MICCAI Challenge (https://isles22.grand-challenge.org/).
-The top-3 leading algorithms are used in a majority-voting scheme to predict outputs.
+Out-of-the-box software tool for processing MRI scans, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
 
 1. [Installation](#installation)
 2. [Usage](#usage)
