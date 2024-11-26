@@ -1,0 +1,9 @@
+evalutils==0.3.1
+scipy==1.6.3
+SimpleITK
+scikit-learn==0.24.2
+scikit-image==0.18
+nibabel
+monai[all]==0.9.0
+pydicom==2.1.2
+gdown
