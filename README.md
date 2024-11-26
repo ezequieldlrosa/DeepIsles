@@ -1,10 +1,9 @@
 ![alt text](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/logo.png)
 
 # DeepIsles
-## ISLES'22 Ischemic Stroke Lesion Segmentation  
 
 ## Introduction
-Algorithm to predict ischemic stroke lesions from MRI data.
+Ischemic stroke lesion segmentation in MRI.
 
 This repository contains an ensemble algorithm devised in the context of the ISLES'22 MICCAI Challenge (https://isles22.grand-challenge.org/).
 The top-3 leading algorithms are used in a majority-voting scheme to predict outputs.
