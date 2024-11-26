@@ -1,4 +1,4 @@
-![alt text](https://github.com/ezequieldlrosa/DeepIsles/blob/master/logo.png)
+![alt text](https://github.com/ezequieldlrosa/DeepIsles/logo.png)
 
 # DeepIsles
 ## ISLES'22 Ischemic Stroke Lesion Segmentation  
