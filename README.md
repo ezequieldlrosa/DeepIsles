@@ -13,7 +13,7 @@ The top-3 leading algorithms are used in a majority-voting scheme to predict out
 2. [Usage](#usage)
 3. [Get started](#get-started)
 4. [Citation](#citation)
-5. [About the Ensembled Algorithms](#about-the-ensembled-algorithms)
+5. [About DeepIsles algorithms ](#about-deepisles-algorithms)
 6. [Questions](#questions)
 7. [Acknowledgement](#acknowledgement)
 
@@ -22,16 +22,16 @@ The top-3 leading algorithms are used in a majority-voting scheme to predict out
 1.1) Clone this repository.
 
 ```bash
-git clone https://github.com/Tabrisrei/ISLES22_Ensemble.git
-cd ISLES22_Ensemble
+git clone https://github.com/ezequieldlrosa/DeepIsles.git
+cd DeepIsles
 ```
 
 1.2) Create a conda environment and install dependencies. 
 **Note: Mandatory Python version 3.8.0 (!)**
 
 ```bash
-conda create --name isles_ensemble python=3.8.0 pip=23.3.1
-conda activate isles_ensemble
+conda create --name deepisles python=3.8.0 pip=23.3.1
+conda activate deepisles
 conda install pytorch==1.11.0 torchvision==0.12.0 torchaudio==0.11.0 cudatoolkit=11.3 -c pytorch
 conda install -c conda-forge openslide-python
 conda install python=3.8.0 # important, since pytorch triggers the installation of later python versions
@@ -48,7 +48,7 @@ If successfully installed all required packages, you can follow  the steps below
 Your directory should look like:
 ```
 
-ISLES22_Ensemble/
+DeepIsles/
 ├── weights/
 │   ├── SEALS/
 │   │   └── (...)
@@ -73,7 +73,7 @@ ISLES22_Ensemble/
 ### Python
 
 ```bash
-ENSEMBLE_PATH = 'path-to-isles-ensemble-repo' 
+PATH_DEEPISLES = 'path-to-isles-ensemble-repo' 
 import sys
 from isles22_ensemble import IslesEnsemble
 sys.path.append(ENSEMBLE_PATH)
@@ -84,7 +84,7 @@ INPUT_DWI = 'path-to-dwi.nii.gz'
 OUTPUT_PATH = 'path-to-output-folder'
 
 stroke_segm = IslesEnsemble()
-stroke_segm.predict_ensemble(ensemble_path=ENSEMBLE_PATH,
+stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPISLES,
                  input_dwi_path=INPUT_DWI,
                  input_adc_path=INPUT_ADC,
                  input_flair_path=INPUT_FLAIR,
@@ -99,7 +99,7 @@ Requirements:
 
 Docker usage: 
 ```bash
-docker run --gpus all -v /*path*/ISLES22_Ensemble/data:/app/data deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
+docker run --gpus all -v /*path*/DeepIsles/data:/app/data deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
 ```
 
 ### Extra Parameters
@@ -133,7 +133,7 @@ If you use this repository, please cite the following publications:
 
 
 
-## About the Ensembled Algorithms 
+## About DeepIsles algorithms 
 * Algorithm SEALS is based on [nnUnet](https://github.com/MIC-DKFZ/nnUNet). Git [repo](https://github.com/Tabrisrei/ISLES22_SEALS) 
 
 * Algorithm NVAUTO is based on [MONAI](https://github.com/Project-MONAI/MONAI) Auto3dseg. Git [repo](https://github.com/mahfuzmohammad/isles22)
