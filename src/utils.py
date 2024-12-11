@@ -28,7 +28,7 @@ def print_completed(mypath):
 
 def print_ensemble_message():
     # Aesthetic header
-    citation_title = "If you are using The Isles'22 Ensemble algorithm, please cite the following work:"
+    citation_title = "If you are using DeepISLES, please cite the following work:"
     citation_text = (
         "de la Rosa, E. et al. (2024) A Robust Ensemble Algorithm for Ischemic Stroke Lesion Segmentation: "
         "Generalizability and Clinical Utility Beyond the ISLES Challenge. arXiv:2403.19425."
