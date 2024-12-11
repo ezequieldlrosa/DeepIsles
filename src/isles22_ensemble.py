@@ -221,13 +221,13 @@ class IslesEnsemble:
             # NVAUTO Command
             print_run('NVAUTO')
             path_nvauto = os.path.join(self.ensemble_path, 'src', 'NVAUTO/')
-            command_nvauto = f'python process.py --input_path {self.tmp_out_dir}'
+            command_nvauto = f'python process.py --input_path {self.tmp_out_dir} --model_path {self.weights_dir}'
             commands.append((command_nvauto, path_nvauto))
 
             # FACTORIZER Command
             print_run('SWAN')
             path_factorizer = os.path.join(self.ensemble_path, 'src', 'FACTORIZER/')
-            command_factorizer = f'python process.py --input_path {self.tmp_out_dir}'
+            command_factorizer = f'python process.py --input_path {self.tmp_out_dir} --model_path {self.weights_dir}'
             commands.append((command_factorizer, path_factorizer))
 
         # Execute commands based on parallelization flag

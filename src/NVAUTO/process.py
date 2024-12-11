@@ -20,7 +20,8 @@ sys.path.append('')
 # todo change with your team-name
 class ThresholdModel():
     def __init__(self,
-                 input_path: Path):
+                 input_path: Path,
+                 model_path: Path):
 
         self.debug = False  # False for running the docker!
         if self.debug:
@@ -68,30 +69,30 @@ class ThresholdModel():
 
         validation_files = [{"image": [adc_image_path, dwi_image_path]}]
         #dirname = os.path.dirname(__file__)
-        dirname = os.path.dirname(os.path.dirname(os.getcwd()))
+        #dirname = os.path.dirname(os.path.dirname(os.getcwd()))
         val_ds = data.Dataset(data=validation_files, transform=val_transform)
         val_loader = data.DataLoader(val_ds, batch_size=1, shuffle=False, num_workers=0, sampler=None)
 
 
-        checkpoints = [ os.path.join(dirname, 'weights/NVAUTO/ts/model0.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model1.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model2.ts'),
+        checkpoints = [ os.path.join(model_path, 'NVAUTO/ts/model0.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model1.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model2.ts'),
 
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model3.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model4.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model5.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model3.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model4.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model5.ts'),
 
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model6.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model7.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model8.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model6.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model7.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model8.ts'),
 
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model9.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model10.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model11.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model9.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model10.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model11.ts'),
 
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model12.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model13.ts'),
-                        os.path.join(dirname, 'weights/NVAUTO/ts/model14.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model12.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model13.ts'),
+                        os.path.join(model_path, 'NVAUTO/ts/model14.ts'),
 
                         ]
 
@@ -201,7 +202,10 @@ class ThresholdModel():
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_path', type=str, required=True, help="Path to the input data directory")
+    parser.add_argument('--model_path', type=str, required=True, help="Path to model weights")
+
     args = parser.parse_args()
 
     input_path = Path(args.input_path)
-    ThresholdModel(input_path=input_path).process()
+    model_path = Path(args.model_path)
+    ThresholdModel(input_path=input_path, model_path=model_path).process()

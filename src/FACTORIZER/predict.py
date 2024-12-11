@@ -20,7 +20,7 @@ cwd = os.path.dirname(__file__)
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-def predict(dwi, adc, flair):
+def predict(dwi, adc, flair, model_path):
     # register flair to dwi
     flair = sitk.Elastix(dwi, flair)
     for file in glob.glob(cwd + "/TransformParameters.*"):
@@ -48,7 +48,7 @@ def predict(dwi, adc, flair):
     )
     dm.test_transform = test_transform
     dm.setup("test")
-    base_model_path = os.path.join(os.path.dirname(os.path.dirname(os.getcwd())), 'weights', 'FACTORIZER')
+    base_model_path = os.path.join(model_path, 'FACTORIZER')
     # load (ensemble) model
     net_class = ft.Ensemble
     net_params = {

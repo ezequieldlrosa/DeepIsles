@@ -10,7 +10,8 @@ import glob
 class Factorizer:
     def __init__(
         self,
-        input_path: Path):
+        input_path: Path,
+        model_path: Path):
 
         self.debug = False  # False for running the docker!
         if self.debug:
@@ -40,7 +41,7 @@ class Factorizer:
         )
 
 
-        prediction = predict(dwi_image, adc_image, flair_image)
+        prediction = predict(dwi_image, adc_image, flair_image, model_path=model_path)
 
         return prediction.astype(int)
 
@@ -119,7 +120,10 @@ class Factorizer:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--input_path', type=str, required=True, help="Path to the input data directory")
+    parser.add_argument('--model_path', type=str, required=True, help="Path to model weights")
+
     args = parser.parse_args()
 
     input_path = Path(args.input_path)
-    Factorizer(input_path=input_path).process()
+    model_path = Path(args.model_path)
+    Factorizer(input_path=input_path, model_path=model_path).process()
