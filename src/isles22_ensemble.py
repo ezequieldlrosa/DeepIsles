@@ -58,7 +58,7 @@ class IslesEnsemble:
         self.results_mni = results_mni
         self.tmp_out_dir = tempfile.mkdtemp(prefix="tmp", dir="/tmp")
         self.mni_flair_path = os.path.join(ensemble_path, 'data', 'atlas', 'flair_mni.nii.gz')
-        self.ensemble_mask_path = os.path.join(output_path, 'lesion_msk.nii.gz')
+        self.ensemble_output_path = os.path.join(self.tmp_out_dir, 'output', 'deepisles')
         self.keep_tmp_files = False
         self.weights_dir = weights_dir if weights_dir is not None else os.path.join(ensemble_path, 'weights')
 
@@ -69,11 +69,10 @@ class IslesEnsemble:
         else:
             self.parallelize = False
 
-        # Algotirhm print
-        print_ensemble_message()
-
 
         # process
+        # Algotirhm print
+        print_ensemble_message()
         self.load_images()
         self.check_images()
         self.extract_brain()
@@ -82,8 +81,6 @@ class IslesEnsemble:
         self.ensemble()
         self.register_mni()
         self.copy_output_clean()
-
-
         print_completed(self.original_dwi_path)
 
     def check_images(self):
@@ -136,10 +133,23 @@ class IslesEnsemble:
                             os.path.join(self.ensemble_path, 'input', 'images', 'flair-brain-mri', 'flair.nii.gz'))
 
     def copy_output_clean(self):
+        if not os.path.exists(self.output_path):
+            os.mkdir(self.output_path)
         # Copy results
+        shutil.copyfile(os.path.join(self.ensemble_output_path, 'lesion_msk.nii.gz'), os.path.join(self.output_path, 'lesion_msk.nii.gz'))
+        shutil.copyfile(os.path.join(self.ensemble_output_path, 'output_screenshot.png'), os.path.join(self.output_path,  'output_screenshot.png'))
+
         if self.save_team_outputs:
-            shutil.copytree(os.path.join(self.tmp_out_dir, 'output'),
-                            os.path.join(self.output_path, 'output_teams'))
+            if not os.path.exists(os.path.join(self.ensemble_path, 'output_teams')):
+                os.mkdir(os.path.join(self.ensemble_path, 'output_teams'))
+
+            for subfolder in os.listdir(os.path.join(self.tmp_out_dir, 'output')):
+                full_subfolder_path = os.path.join(os.path.join(self.tmp_out_dir, 'output'), subfolder)
+
+                # Skip copying the 'deepisles' folder
+                if os.path.isdir(full_subfolder_path) and subfolder != 'deepisles':
+                    shutil.copytree(full_subfolder_path, os.path.join(self.output_path, 'output_teams', subfolder))
+
         if self.results_mni:
             os.mkdir(os.path.join(self.output_path, 'output_mni'))
             for nii_file in glob.glob(os.path.join(self.tmp_out_dir, 'mni', '*.nii.gz')):
@@ -243,16 +253,18 @@ class IslesEnsemble:
     def ensemble(self):
         # Ensembling results
         path_voting = self.ensemble_path
-        command_voting = f'python ./src/majority_voting.py -i {self.tmp_out_dir} -o {self.output_path} '
+
+        os.mkdir(self.ensemble_output_path)
+        command_voting = f'python ./src/majority_voting.py -i {self.tmp_out_dir} -o {self.ensemble_output_path}'
         subprocess.call(command_voting, shell=True, cwd=path_voting)
         # generate screenshots
 
-        out_qc_path = self.output_path + '/output_screenshot.png'
+        out_qc_path = self.ensemble_output_path + '/output_screenshot.png'
         brain_msk_path = self.reg_brain_mask if hasattr(self, 'reg_brain_mask') else None
         registration_qc([self.input_dwi_path, self.input_adc_path],
                     ['dwi', 'adc'],
                         out_qc_path,
-                        os.path.join(self.output_path,  'lesion_msk.nii.gz'), brain_msk_path)
+                        os.path.join(self.ensemble_output_path,  'lesion_msk.nii.gz'), brain_msk_path)
 
     def register_images(self):
         os.mkdir(self.tmp_out_dir+'/flair/reg')
@@ -284,7 +296,7 @@ class IslesEnsemble:
             register_mri(self.mni_flair_path, self.reg_flair, self.tmp_out_dir + '/mni/flair-mni.nii.gz', transformation='affine') # flair to mni
             propagate_image(self.input_dwi_path, self.tmp_out_dir + '/mni/dwi-mni.nii.gz', is_mask=False)
             propagate_image(self.input_adc_path, self.tmp_out_dir + '/mni/adc-mni.nii.gz', is_mask=False)
-            propagate_image(self.ensemble_mask_path, self.tmp_out_dir + '/mni/lesion_msk-mni.nii.gz', is_mask=True)
+            propagate_image(self.ensemble_output_path+'/lesion_msk.nii.gz', self.tmp_out_dir + '/mni/lesion_msk-mni.nii.gz', is_mask=True)
 
             if self.skull_strip:
                 propagate_image(self.reg_brain_mask, self.tmp_out_dir + '/mni/brain_msk-mni.nii.gz', is_mask=True)
