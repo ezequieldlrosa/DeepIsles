@@ -2,11 +2,14 @@
 
 # Accept raw_data_dir as the first argument to this script
 RAW_DATA_DIR=$1
+BASE_RESULTS_PATH=$2
+RESULTS_FOLDER_PATH="${BASE_RESULTS_PATH}/SEALS/nnUNet_trained_models"
+chmod -R u+rwX "$RESULTS_FOLDER_PATH"
 
 # Suppressing output of environment variable exports
 export nnUNet_raw_data_base="data/nnUNet_raw_data_base" >/dev/null 2>&1
 export nnUNet_preprocessed="data/nnUNet_preprocessed" >/dev/null 2>&1
-export RESULTS_FOLDER="../../weights/SEALS/nnUNet_trained_models" >/dev/null 2>&1
+export RESULTS_FOLDER=$RESULTS_FOLDER_PATH >/dev/null 2>&1
 export nnUNet_n_proc_DA=24 >/dev/null 2>&1
 
 python nnunet/dataset_conversion/Task500_Ischemic_Stroke_Test.py --raw_data_dir "$RAW_DATA_DIR" >/dev/null 2>&1

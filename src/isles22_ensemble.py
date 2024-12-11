@@ -19,7 +19,9 @@ class IslesEnsemble:
         pass
 
     def predict_ensemble(self, ensemble_path, input_dwi_path, input_adc_path, output_path, input_flair_path=None,
-                         skull_strip=False, fast=False, save_team_outputs=False, parallelize=True, results_mni=False):
+                         skull_strip=False, fast=False, save_team_outputs=False, parallelize=True, results_mni=False,
+                         weights_dir=None):
+
         ''' Runs the Isles'22 Ensemble algorithm.
 
         Inputs:
@@ -58,12 +60,16 @@ class IslesEnsemble:
         self.mni_flair_path = os.path.join(ensemble_path, 'data', 'atlas', 'flair_mni.nii.gz')
         self.ensemble_mask_path = os.path.join(output_path, 'lesion_msk.nii.gz')
         self.keep_tmp_files = False
+        self.weights_dir = weights_dir if weights_dir is not None else os.path.join(ensemble_path, 'weights')
 
+        # GPU
         gpu_avail = check_gpu_memory()
         if parallelize and gpu_avail:                   # Unless intentional false, paralellize inference.
             self.parallelize = True
         else:
             self.parallelize = False
+
+        # Algotirhm print
         print_ensemble_message()
 
 
@@ -208,7 +214,7 @@ class IslesEnsemble:
         # SEALS Command
         print_run('SEALS')
         path_seals = os.path.join(self.ensemble_path, 'src', 'SEALS/')
-        command_seals = f'./nnunet_launcher.sh {self.tmp_out_dir}'
+        command_seals = f'./nnunet_launcher.sh {self.tmp_out_dir} {self.weights_dir}'
         commands.append((command_seals, path_seals))
 
         if self.input_flair_path is not None and not self.fast:
