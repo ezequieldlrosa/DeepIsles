@@ -6,7 +6,7 @@ import SimpleITK as sitk
 from HD_BET.data_loading import load_and_preprocess, save_segmentation_nifti
 from HD_BET.predict_case import predict_case_3D_net
 import imp
-from HD_BET.utils import postprocess_prediction, SetNetworkToVal, get_params_fname, maybe_download_parameters
+from HD_BET.utils import postprocess_prediction, SetNetworkToVal, get_params_fname, maybe_download_parameters, has_internet, get_params_fname_local
 import os
 import HD_BET
 
@@ -38,18 +38,35 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
     """
 
     list_of_param_files = []
+    internet_avail = has_internet()
+
+    #internet_avail = False
+    models_path = os.path.join(os.getcwd(), 'opt', 'ml', 'model') # todo- initially hardcoded
+    #models_path = '/home/edelarosa/Documents/git/deepisles_gc/test/opt/ml/model/weights'
+    print('MODELS PATH!!')
+    print(models_path)
 
     if mode == 'fast':
-        params_file = get_params_fname(0)
-        maybe_download_parameters(0)
-
-        list_of_param_files.append(params_file)
-    elif mode == 'accurate':
-        for i in range(5):
-            params_file = get_params_fname(i)
-            maybe_download_parameters(i)
+        if internet_avail: #default
+            params_file = get_params_fname(0)
+            maybe_download_parameters(0)
 
             list_of_param_files.append(params_file)
+        else: # no internet mode
+            params_file = get_params_fname_local(models_path, 0)
+            list_of_param_files.append(params_file)
+
+    elif mode == 'accurate':
+        if internet_avail: # default
+            for i in range(5):
+                params_file = get_params_fname(i)
+                maybe_download_parameters(i)
+
+                list_of_param_files.append(params_file)
+        else: # no internet mode
+            for i in range(5):
+                params_file =get_params_fname_local(models_path, i)
+                list_of_param_files.append(params_file)
     else:
         raise ValueError("Unknown value for mode: %s. Expected: fast or accurate" % mode)
 

@@ -7,6 +7,23 @@ import numpy as np
 from skimage.morphology import label
 import os
 from HD_BET.paths import folder_with_parameter_files
+import socket
+
+def has_internet():
+    """
+    Check for internet connectivity by attempting to connect to a known server.
+    :return: True if internet is accessible, False otherwise.
+    """
+    try:
+        # Try to connect to Google's public DNS server
+        socket.create_connection(("8.8.8.8", 53), timeout=5)
+        return True
+    except OSError:
+        return False
+
+
+def get_params_fname_local(main_path, fold): # allows specifying the desired path
+    return os.path.join(main_path, "%d.model" % fold)
 
 
 def get_params_fname(fold):
