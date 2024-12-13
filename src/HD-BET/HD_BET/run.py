@@ -42,9 +42,6 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
 
     #internet_avail = False
     models_path = os.path.join(os.getcwd(), 'opt', 'ml', 'model') # todo- initially hardcoded
-    #models_path = '/home/edelarosa/Documents/git/deepisles_gc/test/opt/ml/model/weights'
-    print('MODELS PATH!!')
-    print(models_path)
 
     if mode == 'fast':
         if internet_avail: #default
