@@ -41,7 +41,7 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
     internet_avail = has_internet()
 
     #internet_avail = False
-    models_path = os.path.join(os.getcwd(), 'opt', 'ml', 'model', 'weights') # todo- initially hardcoded
+    models_path = os.path.join(os.getcwd(), 'test','opt', 'ml', 'model', 'weights', 'hd_bet') # todo- initially hardcoded
 
     if mode == 'fast':
         if internet_avail: #default
