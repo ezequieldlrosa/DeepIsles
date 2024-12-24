@@ -1,22 +1,39 @@
 ![alt text](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/logo.png)
 
-# DeepIsles
+# DeepISLES
 
 ## Introduction
 Ischemic stroke lesion segmentation in MRI.
 
 Out-of-the-box software tool for processing MRI scans, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
 
-1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Get started](#get-started)
-4. [Citation](#citation)
-5. [About DeepIsles algorithms ](#about-deepisles-algorithms)
-6. [Questions](#questions)
-7. [Acknowledgement](#acknowledgement)
+1. [Running DeepIsles](#running-deepisles)
+2. [Source Git](#source-git)
+   1. [Installation](#installation)
+   2. [Usage](#usage)
+   3. [Get Started](#get-started)
+3. [Docker](#docker)
+4. [Standalone Software](#standalone-software)
+5. [Web-service](#web-service)
+6. [Citation](#citation)
+7. [About DeepIsles Algorithms](#about-deepisles-algorithms)
+8. [Questions](#questions)
+9. [Acknowledgement](#acknowledgement)
 
 
-## Installation
+## Running DeepISLES
+
+DeepISLES is available in four different formats:
+
+1. **Source Git**  
+2. **Docker** 
+3. **Standalone Software with GUI** 
+4. **Web Service**  
+---
+
+## Source Git
+
+### Installation
 1.1) Clone this repository.
 
 ```bash
@@ -57,18 +74,16 @@ DeepIsles/
 ```
 
 
-## Usage
-### Supported Formats
+### Usage
+#### Supported Formats
 - **Input formats**:  `.dcm`, `.nii`, `.nii.gz`, `.mha`.
 - **Processing**: The algorithm works directly in the native image space — no additional preprocessing required.
 
-### Required Image Modalities
+#### Required Image Modalities
 - **DWI (b=1000)**: Required
 - **ADC**: Required
 - **FLAIR**: Required for ensemble (optional for single algorithm outputs)
 
-
-### Python
 
 ```bash
 PATH_DEEPISLES = 'path-to-repo' 
@@ -89,13 +104,21 @@ stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPISLES,
                  output_path=OUTPUT_PATH)
 ```
 
-### Docker
+### Get started 
+Try DeepIsles out over the provided example data:
+```bash
+ python scripts/predict.py
+```
 
-Requirements: 
+The example scan belongs to the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022).
+
+## Docker
+
+### Requirements: 
 - [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 - [Download](https://hub.docker.com/repository/docker/isleschallenge/deepisles/general) the Docker image or build it as  ```bash docker build -t deepisles .```
 
-Docker usage: 
+### Docker usage: 
 ```bash
 docker run --gpus all -v /*path*/DeepIsles/data:/app/data deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
 ```
@@ -109,14 +132,18 @@ docker run --gpus all -v /*path*/DeepIsles/data:/app/data deepisles --dwi_file_n
 - **`results_mni`**: `True`/`False` (default: `False`) — Save images and outputs in MNI.
 
 
+## Standalone software
 
-## Get started 
-Try DeepIsles out over the provided example data:
-```bash
- python scripts/predict.py
-```
+## Web-service
 
-The example scan belongs to the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022).
+DeepISLES is available as a [web-service](https://grand-challenge.org/algorithms/deepisles/).
+
+### Usage
+
+1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)) and validate it.
+2. Request access to [DeepISLES](https://grand-challenge.org/algorithms/deepisles/) ("Try out algorithm").
+3. Drag-and-drop the MRI scans, wait until the job ends, and download your results!
+
 
 ## Citation
 If you use this repository, please cite the following publications:
