@@ -9,6 +9,8 @@ import imp
 from HD_BET.utils import postprocess_prediction, SetNetworkToVal, get_params_fname, maybe_download_parameters, has_internet, get_params_fname_local
 import os
 import HD_BET
+#import glob
+from pathlib import Path
 
 
 def apply_bet(img, bet, out_fname):
@@ -41,7 +43,11 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
     internet_avail = has_internet()
 
     #internet_avail = False
-    models_path = os.path.join(os.getcwd(), 'test','opt', 'ml', 'model', 'weights', 'hd_bet') # todo- initially hardcoded
+    print("internet:", internet_avail)
+    models_path = Path("/opt/ml/model/weights/hd_bet") # todo- initially hardcoded for GC
+
+    #print("models path hdbet", str(models_path))
+    #print(glob.glob(os.path.join(str(models_path), '*')))
 
     if mode == 'fast':
         if internet_avail: #default
@@ -50,7 +56,7 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
 
             list_of_param_files.append(params_file)
         else: # no internet mode
-            params_file = get_params_fname_local(models_path, 0)
+            params_file = get_params_fname_local(str(models_path), 0)
             list_of_param_files.append(params_file)
 
     elif mode == 'accurate':
@@ -62,7 +68,7 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
                 list_of_param_files.append(params_file)
         else: # no internet mode
             for i in range(5):
-                params_file =get_params_fname_local(models_path, i)
+                params_file =get_params_fname_local(str(models_path), i)
                 list_of_param_files.append(params_file)
     else:
         raise ValueError("Unknown value for mode: %s. Expected: fast or accurate" % mode)
