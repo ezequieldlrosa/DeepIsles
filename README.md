@@ -3,10 +3,9 @@
 # DeepISLES
 
 ## Introduction
-Ischemic stroke lesion segmentation in MRI.
+Ischemic stroke lesion segmentation in MRI. Out-of-the-box software tool for processing MRI scans, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
 
-Out-of-the-box software tool for processing MRI scans, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
-
+Content:
 1. [Running DeepIsles](#running-deepisles)
 2. [Source Git](#source-git)
    1. [Installation](#installation)
