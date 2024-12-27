@@ -10,7 +10,7 @@ import warnings
 import numpy as np
 import glob
 from src.utils import convert_to_nii, print_run, print_ensemble_message, print_completed, extract_brain, get_img_shape, \
-    save_nii, check_gpu_memory, register_mri, propagate_image, get_flair_atlas, registration_qc
+    save_nii, check_gpu_memory, register_mri, propagate_image, get_flair_atlas, registration_qc, grant_permissions
 
 from concurrent.futures import ThreadPoolExecutor
 
@@ -69,6 +69,7 @@ class IslesEnsemble:
         else:
             self.parallelize = False
 
+        grant_permissions(self.tmp_out_dir)
 
         # process
         # Algotirhm print
@@ -254,7 +255,7 @@ class IslesEnsemble:
         # Ensembling results
         path_voting = self.ensemble_path
 
-        os.mkdir(self.ensemble_output_path)
+        os.makedirs(self.ensemble_output_path)
         command_voting = f'python ./src/majority_voting.py -i {self.tmp_out_dir} -o {self.ensemble_output_path}'
         subprocess.call(command_voting, shell=True, cwd=path_voting)
         # generate screenshots

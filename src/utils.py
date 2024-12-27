@@ -14,6 +14,8 @@ import os
 import requests
 from matplotlib import pyplot as plt
 import numpy as np
+import stat
+
 #import warnings
 # Initialize colorama for cross-platform support
 init(autoreset=True)
@@ -92,7 +94,12 @@ def convert_to_nii(input_path, tmp_dir, image_mod):
             output_dir_file = os.path.join(output_dir, image_mod+'.nii.gz')
             if not os.path.exists(output_dir):
                 os.makedirs(output_dir)
-            shutil.copyfile(input_path, output_dir_file)
+            if input_path[-4:] == '.mha':
+                image = sitk.ReadImage(input_path)
+                # Write the image as .nii.gz
+                sitk.WriteImage(image, output_dir_file)
+            else:
+                shutil.copyfile(input_path, output_dir_file)
             return output_dir_file, True # flag to indicate dcm/nii
         else:
             raise ValueError("No .nii, .nii.gz, .mha, or Dicom files available.")
@@ -106,7 +113,7 @@ def extract_brain(input_path, output_path, gpu=True, save_mask=0):
 
     # Run HD-BET while suppressing warnings (stderr) but keeping print output (stdout)
     with open(os.devnull, 'w') as devnull:
-        subprocess.call(command_hd_bet, shell=True, stderr=devnull)
+        subprocess.call(command_hd_bet, shell=True)#, stderr=devnull)
 
 
 def check_gpu_memory(min_free_memory_gb=12):
@@ -285,6 +292,25 @@ def registration_qc(image_paths, labels, output_path, lesion_msk_path, brain_mas
     plt.savefig(output_path)
     #plt.show()
 
+
+def grant_permissions(path):
+    """
+    Apply chmod commands to make a directory and its contents readable, writable,
+    and executable, and ensure all .sh files are executable.
+
+    :param path: The directory path to modify.
+    """
+    try:
+        # Ensure read, write, and execute permissions for directories and files
+        subprocess.run(["chmod", "-R", "u+rwX", path], check=True)
+
+        # Make .sh files executable
+        subprocess.run(
+            ["find", path, "-type", "f", "-name", "*.sh", "-exec", "chmod", "u+x", "{}", ";"],
+            check=True
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Error while setting permissions: {e}")
 
 
 
