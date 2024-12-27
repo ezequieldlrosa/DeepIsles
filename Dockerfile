@@ -1,5 +1,5 @@
 # Import image with python environment
-FROM nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04
+FROM nvcr.io/nvidia/cuda:11.8.0-cudnn8-runtime-ubuntu20.04
 
 # Disable interactive installation
 ENV DEBIAN_FRONTEND=noninteractive
