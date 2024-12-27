@@ -4,7 +4,7 @@
 import os
 import sys
 PATH_DEEPSISLES = os.getcwd()  # path-to-ensemble-repo
-sys.path.append(ENSEMBLE_PATH)
+sys.path.append(PATH_DEEPSISLES)
 from src.isles22_ensemble import IslesEnsemble
 
 # .nii/.nii.gz/.mha or DICOM folder
