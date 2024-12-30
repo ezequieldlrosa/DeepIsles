@@ -111,15 +111,15 @@ Try DeepIsles out over the provided example data:
 
 The example scan belongs to the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022).
 
-## Docker
+## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
 
 ### Requirements: 
 - [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
-- [Download](https://hub.docker.com/repository/docker/isleschallenge/deepisles/general) the Docker image or build it as  ```bash docker build -t deepisles .```
+- Download the Docker image (``` docker pull isleschallenge/deepisles ```).
 
-### Docker usage: 
+### Example Docker usage: 
 ```bash
-docker run --gpus all -v /*path*/DeepIsles/data:/app/data deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
+docker run --gpus all -v /*path_to_deepisles_repo*/data:/app/data isleschallenge/deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
 ```
 
 ### Extra Parameters
