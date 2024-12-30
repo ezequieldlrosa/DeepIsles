@@ -12,6 +12,12 @@ RUN apt-get update && \
     gcc \
     g++ \
     make \
+    cmake \
+    git \
+    ninja-build \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+    python3-openslide \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda
