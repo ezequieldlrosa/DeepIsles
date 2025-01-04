@@ -104,7 +104,7 @@ stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPISLES,
 ```
 
 ### Get started 
-Try DeepIsles out over the provided example data:
+Try DeepISLES out over the provided example data:
 ```bash
  python scripts/predict.py
 ```
