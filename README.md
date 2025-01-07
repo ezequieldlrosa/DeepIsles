@@ -149,6 +149,8 @@ DeepISLES is available as a [web-service](https://grand-challenge.org/algorithms
 2. Request access to [DeepISLES](https://grand-challenge.org/algorithms/deepisles/) ("Try out algorithm").
 3. Drag-and-drop the MRI scans, wait until the job ends, and download your results!
 
+Note: For the web-service, DICOM inputs must be provided for each MR sequence as a single .zip file.
+
 
 ## Citation
 If you use this repository, please cite the following publications:
