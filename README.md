@@ -59,6 +59,13 @@ pip install -r requirements.txt
 If successfully installed all required packages, you can follow  the steps below to download and place the checkpoints.
 
 1.3) Download the model weights from [here](https://zenodo.org/records/14026715) and decompress the file inside this repo.
+From the terminal:
+```
+wget https://zenodo.org/records/14026715/files/stroke_ensemble_weights.7z?download=1
+mv 'stroke_ensemble_weights.7z?download=1' weights.7z
+7za x weights.7z 
+```
+
 Your directory should look like:
 ```
 
