@@ -20,5 +20,11 @@ stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPSISLES,
                              input_dwi_path=INPUT_DWI,
                              input_adc_path=INPUT_ADC,
                              input_flair_path=INPUT_FLAIR,
-                             output_path=OUTPUT_PATH)
+                             output_path=OUTPUT_PATH,
+                             skull_strip=False,
+                             fast=False,
+                             save_team_outputs=False,
+                             results_mni=False,
+                             parallelize=True
+                             )
 
