@@ -39,14 +39,17 @@ ADD STUFF HERE!!!
 
 ## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
 
+For easy command-line usage, we provide a pre-built docker image.
+
 ### Requirements: 
 - [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 - Download the Docker image (``` docker pull isleschallenge/deepisles ```).
 
 ### Example Docker usage: 
 ```bash
-docker run --gpus all -v /*path_to_deepisles_repo*/data:/app/data isleschallenge/deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
+docker run --gpus all -v */path_to_deepisles_repo/data/*:/app/data isleschallenge/deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
 ```
+Note: Please replace `*/path_to_deepisles_repo/data/*` with the path where you store your image data files, for example, `/mnt/media/data/`. By default, the docker will save the resulting segmentation and a .png snapshot into a (newly-created) subfolder named `results/` in that folder.
 
 ### Extra Parameters
 
@@ -149,18 +152,16 @@ Try DeepISLES out with the provided example data:
  python scripts/predict.py
 ```
 
-## Citation
+## Citations
 If you use this repository, please cite the following publications:
 
 1. **de la Rosa, E., Reyes, M., Liew, S. L., Hutton, A., Wiest, R., Kaesmacher, J., ... & Wiestler, B. (2024).**  
    *A Robust Ensemble Algorithm for Ischemic Stroke Lesion Segmentation: Generalizability and Clinical Utility Beyond the ISLES Challenge.*  
-   arXiv preprint: [arXiv:2403.19425](https://arxiv.org/abs/2403.19425)
+   [arXiv:2403.19425](https://arxiv.org/abs/2403.19425)
 
 2. **Hernandez Petzsche, M. R., de la Rosa, E., Hanning, U., Wiest, R., Valenzuela, W., Reyes, M., ... & Kirschke, J. S. (2022).**  
    *ISLES 2022: A multi-center magnetic resonance imaging stroke lesion segmentation dataset.*  
-   *Scientific Data, 9*(1), 762.
-
-
+   [*Scientific Data, 9*(1), 762](https://www.nature.com/articles/s41597-022-01875-5)
 
 ## About DeepIsles algorithms 
 * Algorithm SEALS is based on [nnUnet](https://github.com/MIC-DKFZ/nnUNet). Git [repo](https://github.com/Tabrisrei/ISLES22_SEALS) 
@@ -168,7 +169,6 @@ If you use this repository, please cite the following publications:
 * Algorithm NVAUTO is based on [MONAI](https://github.com/Project-MONAI/MONAI) Auto3dseg. Git [repo](https://github.com/mahfuzmohammad/isles22)
 
 * Algorithm SWAN is based on [FACTORIZER](https://github.com/pashtari/factorizer). Git [repo](https://github.com/pashtari/factorizer-isles22)
-
 
 ## Questions
 Please contact Ezequiel de la Rosa (ezequiel.delarosa@uzh.ch).
