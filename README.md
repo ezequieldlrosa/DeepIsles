@@ -5,34 +5,57 @@
 ## Introduction
 DeepISLES is an out-of-the-box software tool for processing MRI scans and segmenting ischemic stroke lesions, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
 
-
-
-DeepISLES is available in four different formats, catering to a range of use cases, from an easy-to-use web service to a command line implementation for batch-processing large data sets:
-
-Content:
-1. [Running DeepIsles](#running-deepisles)
-2. [Source Git](#source-git)
-   1. [Installation](#installation)
-   2. [Usage](#usage)
-   3. [Get Started](#get-started)
-3. [Docker](#docker)
-4. [Standalone Software](#standalone-software)
-5. [Web-service](#web-service)
-6. [Citation](#citation)
-7. [About DeepIsles Algorithms](#about-deepisles-algorithms)
-8. [Questions](#questions)
-9. [Acknowledgement](#acknowledgement)
-
+**Content:**
+1. [Running DeepISLES](#running-deepisles)
+5. [About DeepISLES Algorithms](#about-deepisles-algorithms)
+6. [Citations](#citations)
+7. [Questions](#questions)
+8. [Acknowledgement](#acknowledgement)
 
 ## Running DeepISLES
+![DeepISLES_Formats](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/deepisles_formats.png)
 
-DeepISLES is available in four different formats, catering to a range of use cases, from an easy-to-use web service to a command line implementation for batch-processing large data sets:
+DeepISLES is available in four different formats, catering to various use cases, from an easy-to-use web service to a command-line implementation for batch-processing large data sets. We provide an example MRI scan from the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022) in /data/:
 
-1. **Source Git**  
-2. **Docker** 
-3. **Standalone Software with GUI** 
-4. **Web Service**  
----
+- [Web-service](#web-service)
+- [Standalone Software](#standalone-software)
+- [Docker](#docker)
+- [Source Git](#source-git)
+
+## Web-service
+
+DeepISLES is available as a [web-service](https://grand-challenge.org/algorithms/deepisles/).
+
+### Usage
+
+1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)) and validate it.
+2. Request access to [DeepISLES](https://grand-challenge.org/algorithms/deepisles/) ("Try out algorithm").
+3. Drag-and-drop the MRI scans, wait until the job ends, and download your results!
+
+Note: For the web-service, DICOM inputs must be provided for each MR sequence as a single .zip file.
+
+## Standalone software
+ADD STUFF HERE!!!
+
+## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
+
+### Requirements: 
+- [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- Download the Docker image (``` docker pull isleschallenge/deepisles ```).
+
+### Example Docker usage: 
+```bash
+docker run --gpus all -v /*path_to_deepisles_repo*/data:/app/data isleschallenge/deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
+```
+
+### Extra Parameters
+
+- **`skull_strip`**: `True`/`False` (default: `False`) — Perform skull stripping on input images.
+- **`fast`**: `True`/`False` (default: `False`) — Run a single model for faster execution.
+- **`parallelize`**: `True`/`False` (default: `True`) — Up to 50% faster inference on GPUs with ≥12 GB memory.
+- **`save_team_outputs`**: `True`/`False` (default: `False`) — Save outputs of individual models before ensembling.
+- **`results_mni`**: `True`/`False` (default: `False`) — Save images and outputs in MNI.
+
 
 ## Source Git
 
@@ -60,7 +83,7 @@ pip install -r requirements.txt
 
 ```
 
-If successfully installed all required packages, you can follow  the steps below to download and place the checkpoints.
+If you successfully installed all required packages, you can follow  the steps below to download and place the checkpoints.
 
 1.3) Download the model weights from [here](https://zenodo.org/records/14026715) and decompress the file inside this repo.
 From the terminal:
@@ -70,7 +93,7 @@ mv 'stroke_ensemble_weights.7z?download=1' weights.7z
 7za x weights.7z 
 ```
 
-Your directory should look like:
+Your directory should look like this:
 ```
 
 DeepIsles/
@@ -87,7 +110,7 @@ DeepIsles/
 ### Usage
 #### Supported Formats
 - **Input formats**:  `.dcm`, `.nii`, `.nii.gz`, `.mha`.
-- **Processing**: The algorithm works directly in the native image space — no additional preprocessing required.
+- **Processing**: The algorithm works directly in the native image space — no additional preprocessing is required.
 
 #### Required Image Modalities
 - **DWI (b=1000)**: Required
@@ -121,47 +144,10 @@ stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPSISLES,
 ```
 
 ### Get started 
-Try DeepISLES out over the provided example data:
+Try DeepISLES out with the provided example data:
 ```bash
  python scripts/predict.py
 ```
-
-The example scan belongs to the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022).
-
-## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
-
-### Requirements: 
-- [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
-- Download the Docker image (``` docker pull isleschallenge/deepisles ```).
-
-### Example Docker usage: 
-```bash
-docker run --gpus all -v /*path_to_deepisles_repo*/data:/app/data isleschallenge/deepisles --dwi_file_name sub-strokecase0001_ses-0001_dwi.nii.gz --adc_file_name sub-strokecase0001_ses-0001_adc.nii.gz --flair_file_name sub-strokecase0001_ses-0001_flair.nii.gz
-```
-
-### Extra Parameters
-
-- **`skull_strip`**: `True`/`False` (default: `False`) — Perform skull stripping on input images.
-- **`fast`**: `True`/`False` (default: `False`) — Run a single model for faster execution.
-- **`parallelize`**: `True`/`False` (default: `True`) — Up to 50% faster inference on GPUs with ≥12 GB memory.
-- **`save_team_outputs`**: `True`/`False` (default: `False`) — Save outputs of individual models before ensembling.
-- **`results_mni`**: `True`/`False` (default: `False`) — Save images and outputs in MNI.
-
-
-## Standalone software
-
-## Web-service
-
-DeepISLES is available as a [web-service](https://grand-challenge.org/algorithms/deepisles/).
-
-### Usage
-
-1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)) and validate it.
-2. Request access to [DeepISLES](https://grand-challenge.org/algorithms/deepisles/) ("Try out algorithm").
-3. Drag-and-drop the MRI scans, wait until the job ends, and download your results!
-
-Note: For the web-service, DICOM inputs must be provided for each MR sequence as a single .zip file.
-
 
 ## Citation
 If you use this repository, please cite the following publications:
