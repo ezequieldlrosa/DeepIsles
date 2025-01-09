@@ -1,9 +1,13 @@
 ![alt text](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/logo.png)
 
-# DeepISLES
+# DeepISLES <br> State-of-the-art ischemic stroke lesion segmentation in MRI
 
 ## Introduction
-Ischemic stroke lesion segmentation in MRI. Out-of-the-box software tool for processing MRI scans, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
+DeepISLES is an out-of-the-box software tool for processing MRI scans and segmenting ischemic stroke lesions, developed in collaboration with leading teams from the [ISLES'22 MICCAI Challenge](https://isles22.grand-challenge.org/).
+
+
+
+DeepISLES is available in four different formats, catering to a range of use cases, from an easy-to-use web service to a command line implementation for batch-processing large data sets:
 
 Content:
 1. [Running DeepIsles](#running-deepisles)
@@ -22,7 +26,7 @@ Content:
 
 ## Running DeepISLES
 
-DeepISLES is available in four different formats:
+DeepISLES is available in four different formats, catering to a range of use cases, from an easy-to-use web service to a command line implementation for batch-processing large data sets:
 
 1. **Source Git**  
 2. **Docker** 
