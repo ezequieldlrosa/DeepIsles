@@ -34,8 +34,15 @@ DeepISLES is available as a [web-service](https://grand-challenge.org/algorithms
 
 Note: For the web-service, DICOM inputs must be provided for each MR sequence as a single .zip file.
 
-## Standalone software
-ADD STUFF HERE!!!
+## Standalone Software
+
+A standalone version of DeepISLES is available, complete with a graphical user interface (GUI) that supports both single and batch processing. This version is hosted on [NITRC](https://www.nitrc.org/projects/deepisles/).
+
+### Requirements
+- [Docker](https://docs.docker.com/engine/install/) and the [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)  
+- Linux system (Ubuntu ≥ 20.04)  
+- GPU
+
 
 ## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
 
