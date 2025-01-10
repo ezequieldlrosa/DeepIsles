@@ -56,7 +56,7 @@ For easy command-line usage, we provide a pre-built docker image.
 ```bash
 docker run --gpus all -v */path_to_data*:/app/data isleschallenge/deepisles --dwi_file_name dwi.nii.gz --adc_file_name adc.nii.gz --flair_file_name flair.nii.gz
 ```
-Note: Please replace `*/path_to_data*` with the path where you store your image data files, for example, `/mnt/media/data`. ABy default, the docker will save the resulting segmentation and a .png snapshot into a (newly-created) subfolder named `results/` in that folder.
+Note: Please replace `*/path_to_data*` with the path where you store your image data files, for example, `/mnt/media/data`. By default, the docker will save results into a (newly-created) subfolder named `results/` in that folder.
 
 ### Extra Parameters
 
