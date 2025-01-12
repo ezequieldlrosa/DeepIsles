@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/logo.png)
+![alt text](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/logo.png)
 
 # DeepISLES <br> State-of-the-art ischemic stroke lesion segmentation in MRI
 
@@ -13,7 +13,7 @@ DeepISLES is an out-of-the-box software tool for processing MRI scans and segmen
 8. [Acknowledgement](#acknowledgement)
 
 ## Running DeepISLES
-![DeepISLES_Formats](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/deepisles_formats.png)
+![DeepISLES_Formats](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/deepisles_formats.png)
 
 DeepISLES is available in four different formats, catering to various use cases, from an easy-to-use web service to a command-line implementation for batch-processing large data sets. We provide an example MRI scan from the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022) in /data/:
 
@@ -38,7 +38,7 @@ Note: For the web-service, DICOM inputs must be provided for each MR sequence as
 
 A standalone version of DeepISLES is available, complete with a graphical user interface (GUI) that supports both single and batch processing. This version is hosted on [NITRC](https://www.nitrc.org/projects/deepisles/) ("Downloads" section on the left-hand side). Installation instructions for Linux and Windows systems (GPU required) are also provided there.
 
-![DeepISLES_GUI](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/deepisles_gui.png)
+![DeepISLES_GUI](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/deepisles_gui.png)
 
 
 ## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
