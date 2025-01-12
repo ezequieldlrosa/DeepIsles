@@ -24,8 +24,9 @@ try:
 except:
     columns = 80
 
-def print_completed(mypath):
-    print(Fore.GREEN + Style.BRIGHT + f'Finished: {mypath}')
+def print_completed(input_path, output_path):
+    print(Fore.GREEN + Style.BRIGHT + f'Finished: {input_path}')
+    print(Fore.GREEN + Style.BRIGHT + f'Results stored in: {output_path}')
 
 
 def print_ensemble_message():

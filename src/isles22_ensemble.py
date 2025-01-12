@@ -82,7 +82,7 @@ class IslesEnsemble:
         self.ensemble()
         self.register_mni()
         self.copy_output_clean()
-        print_completed(self.original_dwi_path)
+        print_completed(self.original_dwi_path, self.output_path)
 
     def check_images(self):
         # Check image dimensions and affine compatibility

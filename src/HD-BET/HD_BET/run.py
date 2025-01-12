@@ -43,7 +43,7 @@ def run_hd_bet(mri_fnames, output_fnames, mode="accurate", config_file=os.path.j
     internet_avail = has_internet()
 
     #internet_avail = False
-    print("internet:", internet_avail)
+    #print("internet:", internet_avail)
     models_path = Path("/opt/ml/model/weights/hd_bet") # todo- initially hardcoded for GC
 
     #print("models path hdbet", str(models_path))
