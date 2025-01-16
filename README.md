@@ -40,6 +40,7 @@ A standalone version of DeepISLES is available, complete with a graphical user i
 
 ![DeepISLES_GUI](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/deepisles_gui.png)
 
+Note: Ensure your data is organized so that all MR modalities are contained within a single folder for `.nii`/`.nii.gz`/`.mha` files (e.g., `/path_to_data/dwi.nii.gz`, `/path_to_data/adc.nii.gz`, `/path_to_data/flair.nii.gz`) or, for DICOM files, with each modality in separate subfolders (e.g., `/path_to_dicom/dwi`, `/path_to_dicom/adc`, `/path_to_dicom/flair`).
 
 ## [Docker](https://hub.docker.com/repository/docker/isleschallenge/deepisles)
 
