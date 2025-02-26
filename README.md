@@ -48,7 +48,8 @@ For easy command-line usage, we provide a pre-built docker image.
 
 ### Requirements: 
 - [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
-- Download the Docker image (``` docker pull isleschallenge/deepisles ```).
+- IMPORTANT: Verify your docker / Nvidia installation using ```docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi```
+- Download the Docker image (```docker pull isleschallenge/deepisles```).
 
 ### Example Docker usage: 
 ```bash
