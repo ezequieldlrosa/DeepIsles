@@ -38,6 +38,8 @@ Note: For the web-service, DICOM inputs must be provided for each MR sequence as
 
 A standalone version of DeepISLES is available, complete with a graphical user interface (GUI) that supports both single and batch processing. This version is hosted on [NITRC](https://www.nitrc.org/projects/deepisles/) ("Downloads" section on the left-hand side). Installation instructions for Linux and Windows systems (GPU required) are also provided there.
 
+Please note that the standalone software also requires Docker + Nvidia Container Toolkit installed - see [Docker](#docker) for details!
+
 ![DeepISLES_GUI](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/deepisles_gui.png)
 
 Note: Ensure your data is organized so that all MR modalities are contained within a single folder for `.nii`/`.nii.gz`/`.mha` files (e.g., `/path_to_data/dwi.nii.gz`, `/path_to_data/adc.nii.gz`, `/path_to_data/flair.nii.gz`) or, for DICOM files, with each modality in separate subfolders (e.g., `/path_to_dicom/dwi`, `/path_to_dicom/adc`, `/path_to_dicom/flair`).
