@@ -15,28 +15,28 @@ DeepISLES is an out-of-the-box software tool for processing MRI scans and segmen
 ## Running DeepISLES
 ![DeepISLES_Formats](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/deepisles_formats.png)
 
-DeepISLES is available in four different formats, catering to various use cases, from an easy-to-use web service to a command-line implementation for batch-processing large data sets. We provide an example MRI scan from the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022) in /data/:
+DeepISLES is available in four different formats, catering to various use cases, from an easy-to-use web service to a command-line implementation for batch-processing large data sets. Below, you will find installation and use instructions for the various formats. We provide an example MRI scan from the ISLES'22 dataset (Hernandez Petzsche et al., Sci Data 2022) in /data/:
 
 - [Web-service](#web-service)
-- [Standalone Software](#standalone-software)
+- [Standalone Software with GUI](#standalone-software)
 - [Docker](#docker)
 - [Source Git](#source-git)
 
 ## Web-service
 
-DeepISLES is available as a [web-service](https://grand-challenge.org/algorithms/deepisles/).
+DeepISLES is available as an easy-to-use [web service](https://grand-challenge.org/algorithms/deepisles/), hosted on [Grand Challenge](https://grand-challenge.org/). This service allows for an easy, straight-forward processing of individual scans to try out DeepISLES.
 
-### Usage
+To access the web service, please follow these three steps:
 
-1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)) and validate it.
+1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)). Please note that GC sends out a validation email that contains instructions how to successfully activate your account. 
 2. Request access to [DeepISLES](https://grand-challenge.org/algorithms/deepisles/) ("Try out algorithm").
 3. Drag-and-drop the MRI scans, wait until the job ends, and download your results!
 
-Note: For the web-service, DICOM inputs must be provided for each MR sequence as a single .zip file.
+Note: DICOM inputs must be provided for each MR sequence as a single .zip file for the web service.
 
 ## Standalone Software
 
-A standalone version of DeepISLES is available, complete with a graphical user interface (GUI) that supports both single and batch processing. This version is hosted on [NITRC](https://www.nitrc.org/projects/deepisles/) ("Downloads" section on the left-hand side). Installation instructions for Linux and Windows systems (GPU required) are also provided there.
+A standalone version of DeepISLES is available, complete with a graphical user interface (GUI) that supports both single case and batch processing. This version is hosted on [NITRC](https://www.nitrc.org/projects/deepisles/) ("Downloads" section on the left-hand side). Installation instructions for Linux and Windows systems (GPU required) are also provided there.
 
 Please note that the standalone software also requires Docker + Nvidia Container Toolkit installed - see [Docker](#docker) for details!
 
@@ -49,9 +49,9 @@ Note: Ensure your data is organized so that all MR modalities are contained with
 For easy command-line usage, we provide a pre-built docker image.
 
 ### Requirements: 
-- [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
-- IMPORTANT: Verify your docker / Nvidia installation using ```docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi```
-- Download the Docker image (```docker pull isleschallenge/deepisles```).
+- Install [Docker](https://docs.docker.com/engine/install/) and [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
+- **IMPORTANT:** Verify your docker / Nvidia installation using ```docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi```. This command should output a list of your NVidia GPUs, ensuring that they are accessible in Docker also.
+- Download the Docker image (```docker pull isleschallenge/deepisles```)
 
 ### Example Docker usage: 
 ```bash
