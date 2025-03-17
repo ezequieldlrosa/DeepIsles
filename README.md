@@ -64,7 +64,9 @@ For DICOM usage, organize your data directory into subfolders (e.g., `/path_to_d
 docker run --gpus all -v */path_to_data*:/app/data isleschallenge/deepisles --dwi_file_name dwi_folder --adc_file_name adc_folder --flair_file_name flair_folder 
 ```
 
-**Note**: Please replace `*/path_to_data*` with the path where you store your image data files, for example, `/mnt/media/data`. By default, the docker will save results into a (newly-created) subfolder named `results/` in that folder (e.g.  `/mnt/media/data/results`)
+**Note**: Please replace `*/path_to_data*` with the path where you store your image data files, for example, `/mnt/media/data`.
+
+**Note**: By default, the docker will save results into a (newly-created) subfolder named `results/` in that folder (e.g.  `/mnt/media/data/results`)
 
 ### Extra Parameters
 
