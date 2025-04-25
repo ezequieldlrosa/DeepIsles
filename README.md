@@ -28,7 +28,7 @@ DeepISLES is available as an easy-to-use [web service](https://grand-challenge.o
 
 To access the web service, please follow these three steps:
 
-1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)) AND verify it ([instructions](https://grand-challenge.org/documentation/verification/) ). Please note that GC sends out a validation email that contains instructions how to successfully activate your account. 
+1. Create an account on Grand Challenge ([https://grand-challenge.org/](https://grand-challenge.org/)) AND verify it (instructions: https://grand-challenge.org/documentation/verification/). Please note that GC sends out a validation email that contains instructions how to successfully activate your account. 
 2. Request access to [DeepISLES](https://grand-challenge.org/algorithms/deepisles/) ("Try out algorithm").
 3. Drag-and-drop the MRI scans, wait until the job ends, and download your results!
 
