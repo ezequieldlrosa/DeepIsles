@@ -142,7 +142,7 @@ DeepIsles/
 PATH_DEEPISLES = 'path-to-repo' 
 import sys
 sys.path.append(PATH_DEEPISLES)
-from isles22_ensemble import IslesEnsemble
+from src.isles22_ensemble import IslesEnsemble
 
 INPUT_FLAIR = 'path-to-flair.nii.gz'
 INPUT_ADC = 'path-to-adc.nii.gz'
