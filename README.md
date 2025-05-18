@@ -150,7 +150,7 @@ INPUT_DWI = 'path-to-dwi.nii.gz'
 OUTPUT_PATH = 'path-to-output-folder'
 
 stroke_segm = IslesEnsemble()
-stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPSISLES,
+stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPISLES,
                              input_dwi_path=INPUT_DWI,
                              input_adc_path=INPUT_ADC,
                              input_flair_path=INPUT_FLAIR,
