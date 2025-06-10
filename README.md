@@ -8,9 +8,10 @@ DeepISLES is an out-of-the-box software tool for processing MRI scans and segmen
 **Content:**
 1. [Running DeepISLES](#running-deepisles)
 5. [About DeepISLES Algorithms](#about-deepisles-algorithms)
-6. [Citations](#citations)
-7. [Questions](#questions)
-8. [Acknowledgement](#acknowledgement)
+6. [Integrating Your Own Models with DeepISLES](#integrating-your-own-models-with-deepisles)
+7. [Citations](#citations)
+8. [Questions](#questions)
+9. [Acknowledgement](#acknowledgement)
 
 ## Running DeepISLES
 ![DeepISLES_Formats](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/deepisles_formats.png)
@@ -186,6 +187,17 @@ If you use this repository, please cite the following publications:
 * Algorithm NVAUTO is based on [MONAI](https://github.com/Project-MONAI/MONAI) Auto3dseg. Git [repo](https://github.com/mahfuzmohammad/isles22)
 
 * Algorithm SWAN is based on [FACTORIZER](https://github.com/pashtari/factorizer). Git [repo](https://github.com/pashtari/factorizer-isles22)
+
+## Integrating Your Own Models with DeepISLES
+
+If you’d like to **integrate or ensemble your own model** with DeepISLES for specific brain imaging tasks, follow these steps:
+
+1. **Add your model's inference code**  
+   Include your inference script (Python or Bash) inside the [`inference()` function](https://github.com/ezequieldlrosa/DeepIsles/blob/main/src/isles22_ensemble.py#L221).
+
+2. **Adapt the ensembling logic**  
+   Modify the [`majority_voting.py`](https://github.com/ezequieldlrosa/DeepIsles/blob/main/src/majority_voting.py#L64) script to read and ensemble your model’s outputs.  
+   You can choose to include or exclude any of the built-in DeepISLES models (SEALS, NVAUTO, SWAN) depending on your specific application.
 
 ## Questions
 Please contact Ezequiel de la Rosa (ezequiel.delarosa@uzh.ch).
