@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15669501.svg)](https://doi.org/10.5281/zenodo.15669501)
+
 ![alt text](https://raw.githubusercontent.com/ezequieldlrosa/DeepIsles/main/figs/logo.png)
 
 # DeepISLES <br> State-of-the-art ischemic stroke lesion segmentation in MRI
