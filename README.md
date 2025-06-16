@@ -10,7 +10,7 @@ DeepISLES is an out-of-the-box software tool for processing MRI scans and segmen
 **Content:**
 1. [Running DeepISLES](#running-deepisles)
 5. [About DeepISLES Algorithms](#about-deepisles-algorithms)
-6. [Integrating Your Own Models with DeepISLES](#integrating-your-own-models-with-deepisles)
+6. [Adapting DeepISLES](#adapting-deepisles)
 7. [Citations](#citations)
 8. [Questions](#questions)
 9. [Acknowledgement](#acknowledgement)
@@ -190,16 +190,24 @@ If you use this repository, please cite the following publications:
 
 * Algorithm SWAN is based on [FACTORIZER](https://github.com/pashtari/factorizer). Git [repo](https://github.com/pashtari/factorizer-isles22)
 
-## Integrating Your Own Models with DeepISLES
+## Adapting DeepISLES
 
-If you’d like to **integrate or ensemble your own model** with DeepISLES for specific brain imaging tasks, follow these steps:
+DeepISLES brings together three heterogeneous algorithms, each developed independently by leading research teams around the world. These algorithms rely on distinct libraries, preprocessing protocols, and training methodologies. This diversity is a key factor in DeepISLES’ robust performance, but it also makes direct fine-tuning of the individual models quite challenging in practice.
+To address this and to support ongoing community-driven development, we here outline two practical fine-tuning strategies:
+1. We provide comprehensive instructions for **incorporating new models into the DeepISLES ensemble:**
 
-1. **Add your model's inference code**  
+  - **Add your model's inference code**  
    Include your inference script (Python or Bash) inside the [`inference()` function](https://github.com/ezequieldlrosa/DeepIsles/blob/main/src/isles22_ensemble.py#L221).
 
-2. **Adapt the ensembling logic**  
+  - **Adapt the ensembling logic**  
    Modify the [`majority_voting.py`](https://github.com/ezequieldlrosa/DeepIsles/blob/main/src/majority_voting.py#L64) script to read and ensemble your model’s outputs.  
    You can choose to include or exclude any of the built-in DeepISLES models (SEALS, NVAUTO, SWAN) depending on your specific application.
+
+2. As a more straightforward alternative, we document how to **adjust the weighting of the three models implemented in the DeepISLES ensemble:**
+
+  - **Adapt the ensembling logic**  
+   Modify the [`majority_voting.py`](https://github.com/ezequieldlrosa/DeepIsles/blob/main/src/majority_voting.py#L64) script to adjust how the three models are weighted.
+   Alternatively, you can set the `save_team_outputs` flag to `True` in the DeepISLES docker and implement a custom logic for fusing the three model results.
 
 ## Questions
 Please contact Ezequiel de la Rosa (ezequiel.delarosa@uzh.ch).
