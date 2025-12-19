@@ -12,7 +12,7 @@ export nnUNet_preprocessed="data/nnUNet_preprocessed" >/dev/null 2>&1
 export RESULTS_FOLDER=$RESULTS_FOLDER_PATH >/dev/null 2>&1
 export nnUNet_n_proc_DA=24 >/dev/null 2>&1
 
-python nnunet/dataset_conversion/Task500_Ischemic_Stroke_Test.py --raw_data_dir "$RAW_DATA_DIR" >/dev/null 2>&1
+python nnunet_local/dataset_conversion/Task500_Ischemic_Stroke_Test.py --raw_data_dir "$RAW_DATA_DIR" >/dev/null 2>&1
 
 CUDA_VISIBLE_DEVICES=0 \
 nnUNet_predict \
@@ -24,7 +24,6 @@ nnUNet_predict \
                -f 0 \
                -z \
                --overwrite_existing \
-               --disable_postprocessing \
                >/dev/null 2>&1
 
 CUDA_VISIBLE_DEVICES=0 \
@@ -37,7 +36,6 @@ nnUNet_predict \
                -f 1 \
                -z \
                --overwrite_existing \
-               --disable_postprocessing \
                >/dev/null 2>&1
 
 CUDA_VISIBLE_DEVICES=0 \
@@ -50,7 +48,6 @@ nnUNet_predict \
                -f 2 \
                -z \
                --overwrite_existing \
-               --disable_postprocessing \
                >/dev/null 2>&1
 
 CUDA_VISIBLE_DEVICES=0 \
@@ -63,7 +60,6 @@ nnUNet_predict \
                -f 3 \
                -z \
                --overwrite_existing \
-               --disable_postprocessing \
                >/dev/null 2>&1
 
 CUDA_VISIBLE_DEVICES=0 \
@@ -76,7 +72,6 @@ nnUNet_predict \
                -f 4 \
                -z \
                --overwrite_existing \
-               --disable_postprocessing \
                >/dev/null 2>&1
 
 # Suppressing the python scripts for postprocessing

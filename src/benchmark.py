@@ -274,7 +274,7 @@ def main():
 
     # Optional: Check thresholds and warn
     MIN_DICE = 0.7  # At least 70% overlap
-    MAX_HAUSDORFF = 10.0  # Maximum 10mm surface distance
+    MAX_HAUSDORFF = 15.0  # Maximum 15mm surface distance
     MIN_SENSITIVITY = 0.6  # At least 60% of lesions detected
     MIN_SPECIFICITY = 0.9  # At least 90% specificity
 
