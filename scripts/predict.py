@@ -27,4 +27,3 @@ stroke_segm.predict_ensemble(ensemble_path=PATH_DEEPSISLES,
                              results_mni=False,
                              parallelize=True
                              )
-

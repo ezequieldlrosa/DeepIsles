@@ -49,7 +49,8 @@ dependencies = [
     "networkx==2.8.6",
     
     # === nnUNetv2/SEALS specific ===
-    "nnunetv2>=2.6.2",
+    "nnunet>=1.7.1",  # v1 for SEALS_V1 (Docker-compatible)
+    "nnunetv2>=2.6.2",  # v2 for SEALS_V2
     "acvl-utils>=0.2.3,<0.3",
     "dynamic-network-architectures>=0.4.1,<0.5",
     "batchgenerators>=0.25.1",

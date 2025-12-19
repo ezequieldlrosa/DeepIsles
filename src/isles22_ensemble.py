@@ -21,7 +21,7 @@ class IslesEnsemble:
 
     def predict_ensemble(self, ensemble_path, input_dwi_path, input_adc_path, output_path, input_flair_path=None,
                          skull_strip=False, fast=False, save_team_outputs=False, parallelize=True, results_mni=False,
-                         weights_dir=None):
+                         weights_dir=None, seals_version='v1'):
 
         ''' Runs the Isles'22 Ensemble algorithm.
 
@@ -44,6 +44,8 @@ class IslesEnsemble:
         save_team_outputs: flag for saving individual team outputs
 
         parallelize: flag for running algorithms in parallel (default is True)
+        
+        seals_version: version of SEALS algorithm to use - 'v1' (Docker-compatible, default) or 'v2' (nnUNetv2)
         '''
 
         # Assigning the parameters to self to be accessible throughout the class
@@ -57,6 +59,7 @@ class IslesEnsemble:
         self.fast = fast
         self.save_team_outputs = save_team_outputs
         self.results_mni = results_mni
+        self.seals_version = seals_version
         self.tmp_out_dir = tempfile.mkdtemp(prefix="tmp", dir="/tmp")
         self.mni_flair_path = os.path.join(ensemble_path, 'data', 'atlas', 'flair_mni.nii.gz')
         self.ensemble_output_path = os.path.join(self.tmp_out_dir, 'output', 'deepisles')
@@ -224,9 +227,9 @@ class IslesEnsemble:
         commands = []
 
         # SEALS Command
-        print_run('SEALS')
+        print_run(f'SEALS ({self.seals_version})')
         path_seals = os.path.join(self.ensemble_path, 'src', 'SEALS/')
-        command_seals = f'./nnunet_launcher.sh {self.tmp_out_dir} {self.weights_dir}'
+        command_seals = f'./nnunet_launcher.sh --version {self.seals_version} {self.tmp_out_dir} {self.weights_dir}'
         commands.append((command_seals, path_seals))
 
         if self.input_flair_path is not None and not self.fast:
