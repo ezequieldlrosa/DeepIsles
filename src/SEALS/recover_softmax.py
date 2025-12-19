@@ -13,6 +13,7 @@
 #    limitations under the License.
 
 import argparse
+import pickle
 from glob import glob
 
 import numpy as np
@@ -115,8 +116,6 @@ if __name__=='__main__':
     args = parser.parse_args()
 
     raw_data_dir = args.raw_data_dir
-    args = parser.parse_args()
-
     input_folder   = args.input_folder
     output_folder  = args.output_folder
     model_type     = args.model_type

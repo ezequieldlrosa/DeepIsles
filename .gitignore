@@ -165,3 +165,11 @@ cython_debug/
 .vscode
 
 .DS_Store
+
+# Project-specific patterns
+weights/FACTORIZER/
+weights/NVAUTO/
+weights/SEALS/
+results/
+example_test/
+src/SEALS/data/

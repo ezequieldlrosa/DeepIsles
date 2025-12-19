@@ -23,6 +23,8 @@ class Factorizer:
             self._input_path = input_path
             self._output_path = self._input_path / 'output' / 'factorizer'
             self._algorithm_output_path = self._output_path
+        
+        self.model_path = model_path
 
     def predict(self, input_data):
         """
@@ -41,7 +43,7 @@ class Factorizer:
         )
 
 
-        prediction = predict(dwi_image, adc_image, flair_image, model_path=model_path)
+        prediction = predict(dwi_image, adc_image, flair_image, model_path=self.model_path)
 
         return prediction.astype(int)
 

@@ -4,7 +4,6 @@ import json
 import os
 from pathlib import Path
 import torch
-from torch.cuda.amp import autocast
 from monai import transforms, data
 from monai.inferers import SlidingWindowInferer
 from monai.data.utils import decollate_batch
@@ -111,7 +110,7 @@ class ThresholdModel():
                     model.eval()
 
 
-                    with autocast(enabled=True):
+                    with torch.amp.autocast('cuda', enabled=True):
                         logits = model_inferer(inputs=image, network=model)  # another inferer (e.g. sliding window)
 
                     probs = torch.softmax(logits.float(), dim=1)

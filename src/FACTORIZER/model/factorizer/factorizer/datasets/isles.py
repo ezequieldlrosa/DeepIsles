@@ -22,7 +22,7 @@ from ..data import (
 def isles_train_transform(spacing=(2.0, 2.0, 2.0), spatial_size=(64, 64, 64)):
     train_transform = [
         ReadImaged(["image", "label"]),
-        transforms.AddChanneld("label"),
+        transforms.EnsureChannelFirstd("label"),
         transforms.CropForegroundd(["image", "label"], source_key="image"),
         transforms.NormalizeIntensityd(
             "image", nonzero=True, channel_wise=True
@@ -40,7 +40,6 @@ def isles_train_transform(spacing=(2.0, 2.0, 2.0), spatial_size=(64, 64, 64)):
             rotate_range=[30 * np.pi / 180] * 3,
             scale_range=[0.3] * 3,
             mode=("bilinear", "bilinear"),
-            as_tensor_output=False,
         ),
         transforms.RandFlipd(["image", "label"], prob=0.5, spatial_axis=0),
         transforms.RandFlipd(["image", "label"], prob=0.5, spatial_axis=1),
@@ -67,7 +66,7 @@ def isles_train_transform(spacing=(2.0, 2.0, 2.0), spatial_size=(64, 64, 64)):
 def isles_val_transform():
     val_transform = [
         ReadImaged(["image", "label"], allow_missing_keys=True),
-        transforms.AddChanneld("label", allow_missing_keys=True),
+        transforms.EnsureChannelFirstd("label", allow_missing_keys=True),
         transforms.NormalizeIntensityd(
             "image", nonzero=True, channel_wise=True
         ),
@@ -85,7 +84,7 @@ def isles_test_transform():
 def isles_vis_transform(spacing=(2.0, 2.0, 2.0)):
     vis_transform = [
         ReadImaged(["image", "label"], allow_missing_keys=True),
-        transforms.AddChanneld("label", allow_missing_keys=True),
+        transforms.EnsureChannelFirstd("label", allow_missing_keys=True),
         transforms.NormalizeIntensityd("image", channel_wise=True),
         transforms.Spacingd(
             keys=["image", "label"],
