@@ -37,7 +37,7 @@ dependencies = [
     "openslide-python",
     
     # === Image Processing ===
-    "scikit-image>=0.20.0",
+    "scikit-image>=0.22.0",
     "scikit-learn>=1.3.0",
     "opencv-python>=4.8.0",
     "Pillow==10.0.1",
